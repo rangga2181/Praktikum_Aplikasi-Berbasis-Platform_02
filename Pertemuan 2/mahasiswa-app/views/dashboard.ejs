@@ -1,0 +1,136 @@
+<%- include('layout', { body: `
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary">
+                <i class="fas fa-chart-line me-2"></i>Dashboard
+            </h2>
+            <a href="/students/create" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i> Tambah Mahasiswa
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-4 mb-3">
+        <div class="card bg-primary text-white shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">Total Mahasiswa</h6>
+                        <h2 class="card-title mb-0">${totalStudents}</h2>
+                    </div>
+                    <i class="fas fa-users fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card bg-success text-white shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">Program Studi</h6>
+                        <h2 class="card-title mb-0">${Object.keys(prodiStats).length}</h2>
+                    </div>
+                    <i class="fas fa-university fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card bg-info text-white shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">Angkatan Aktif</h6>
+                        <h2 class="card-title mb-0">${Object.keys(angkatanStats).length}</h2>
+                    </div>
+                    <i class="fas fa-calendar-alt fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Statistik per Prodi -->
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Statistik per Program Studi</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    ${Object.entries(prodiStats).map(([prodi, count]) => `
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            ${prodi}
+                            <span class="badge bg-primary rounded-pill">${count}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistik per Angkatan -->
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Statistik per Angkatan</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    ${Object.entries(angkatanStats).sort((a, b) => b[0] - a[0]).map(([angkatan, count]) => `
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            Angkatan ${angkatan}
+                            <span class="badge bg-success rounded-pill">${count}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Students -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-history me-2"></i>Mahasiswa Terbaru</h5>
+                <a href="/students" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>NIM</th>
+                                <th>Nama</th>
+                                <th>Program Studi</th>
+                                <th>Angkatan</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${recentStudents.map(student => `
+                                <tr>
+                                    <td><span class="badge bg-secondary">${student.nim}</span></td>
+                                    <td>${student.nama}</td>
+                                    <td>${student.prodi}</td>
+                                    <td>${student.angkatan}</td>
+                                    <td><small class="text-muted">${student.email}</small></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+`, title: title, active: 'dashboard' }) %>
