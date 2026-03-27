@@ -4,7 +4,7 @@ Aplikasi web sederhana untuk mengelola data mahasiswa menggunakan **NodeJS + Exp
 
 ## Link Presentasi
 
-https://drive.google.com/file/d/1lSi__rKxHHUNdf8YDPXXtoQAcR2eMP1R/view?usp=drive_link
+https://drive.google.com/drive/folders/1k8jFUX38OvU31UlLUm3uWTYBq1A3UB9M?usp=sharing
 
 ## 🚀 Fitur Aplikasi
 
