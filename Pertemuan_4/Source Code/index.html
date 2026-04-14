@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Modul AJAX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 24px;
+        }
+
+        #hasil-profil {
+            margin-top: 16px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            max-width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>AJAX Profil Sederhana</h1>
+    <button id="btn-tampilkan">Tampilkan Profil</button>
+    <div id="hasil-profil">Belum ada data.</div>
+
+    <script>
+        const tombol = document.getElementById('btn-tampilkan');
+        const hasilProfil = document.getElementById('hasil-profil');
+
+        tombol.addEventListener('click', async () => {
+            hasilProfil.textContent = 'Memuat data...';
+
+            try {
+                const response = await fetch('data.php');
+
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data dari server.');
+                }
+
+                const data = await response.json();
+                hasilProfil.textContent = `Nama: ${data.nama} | Pekerjaan: ${data.pekerjaan} | Lokasi: ${data.lokasi}`;
+            } catch (error) {
+                hasilProfil.textContent = `Terjadi kesalahan: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+
+</html>
